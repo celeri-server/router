@@ -1,0 +1,25 @@
+{
+  "name": "@celeri/router",
+  "version": "1.0.0",
+  "description": "Router for celeri that uses a middleware pipeline for each route",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celeri-server/router.git"
+  },
+  "keywords": [
+    "celeri",
+    "router",
+    "middleware",
+    "server"
+  ],
+  "author": "James Brumond <james@jbrumond.me> (http://www.jbrumond.me)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/celeri-server/router/issues"
+  },
+  "homepage": "https://github.com/celeri-server/router#readme"
+}
