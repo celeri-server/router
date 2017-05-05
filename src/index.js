@@ -24,13 +24,14 @@ export class Router {
 
 	find(method, path) {
 		const { routes } = props.get(this);
+		const methodRoutes = routes[method.toLowerCase()];
 
-		if (! routes[method]) {
+		if (! methodRoutes) {
 			return;
 		}
 
-		for (let i = 0; i < routes.length; i++) {
-			const route = routes[i];
+		for (let i = 0; i < methodRoutes.length; i++) {
+			const route = methodRoutes[i];
 			const match = route.matches(path);
 
 			if (match) {
