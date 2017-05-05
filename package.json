@@ -4,7 +4,8 @@
   "description": "Router for celeri that uses a middleware pipeline for each route",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir build",
+    "postinstall": "postinstall-build build"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,14 @@
   "bugs": {
     "url": "https://github.com/celeri-server/router/issues"
   },
-  "homepage": "https://github.com/celeri-server/router#readme"
+  "homepage": "https://github.com/celeri-server/router#readme",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-celeri": "^1.0.0",
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1"
+  },
+  "dependencies": {
+    "postinstall-build": "^3.0.1"
+  }
 }
