@@ -10,14 +10,16 @@ export class Router {
 		});
 	}
 
-	createRoute(method, route) {
+	createRoute(method, path) {
 		const { routes } = props.get(this);
 
 		if (! routes[method]) {
 			routes[method] = [ ];
 		}
 
-		routes[method].push(new Route(method, route));
+		const route = new Route(method, path);
+		routes[method].push(route);
+		return route;
 	}
 
 	find(method, path) {
