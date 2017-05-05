@@ -1,6 +1,6 @@
 {
   "name": "@celeri/router",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Router for celeri that uses a middleware pipeline for each route",
   "main": "build/index.js",
   "scripts": {
