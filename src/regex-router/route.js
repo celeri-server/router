@@ -9,24 +9,12 @@ const paramReplacement = '([^/]+)';
 const globPattern = /\*\*$/;
 const globReplacement = '(.+)';
 
-export class Route extends MiddlewarePipeline {
-	constructor(method, route) {
+export class RegexRoute extends MiddlewarePipeline {
+	constructor(route) {
 		super();
 
 		const { pattern, params } = parseRoute(route);
-		props.set(this, { method, route, pattern, params });
-	}
-
-	get method() {
-		return props.get(this).method;
-	}
-
-	get route() {
-		return props.get(this).route;
-	}
-
-	get params() {
-		return props.get(this).params;
+		props.set(this, { pattern, params });
 	}
 
 	matches(path) {

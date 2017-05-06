@@ -30,6 +30,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1"
   },
   "dependencies": {
+    "@celeri/middleware-pipeline": "^1.0.5",
     "postinstall-build": "^3.0.1"
   }
 }
