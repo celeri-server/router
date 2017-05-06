@@ -40,7 +40,7 @@ export class Route extends MiddlewarePipeline {
 		let glob;
 		const parsedParams = { };
 		match.slice(1).forEach((value, index) => {
-			const param = params[index - 1];
+			const param = params[index];
 
 			// If this is a final glob match
 			if (! param) {
