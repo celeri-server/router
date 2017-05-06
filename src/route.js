@@ -30,7 +30,7 @@ export class Route extends MiddlewarePipeline {
 	}
 
 	matches(path) {
-		const { route, pattern, params } = props.get(this);
+		const { pattern, params } = props.get(this);
 		const match = pattern.exec(path);
 
 		if (! match) {
