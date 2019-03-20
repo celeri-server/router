@@ -1,5 +1,6 @@
 
 import { RegexRoute } from './route';
+import { Router, FoundRoute } from '../interface';
 
 interface PrivateStorage {
 	routes: {
@@ -7,24 +8,16 @@ interface PrivateStorage {
 	}
 }
 
-interface FoundRoute {
-	route: RegexRoute,
-	params: {
-		[param: string]: string
-	},
-	glob: string
-}
-
 const props: WeakMap<RegexRouter, PrivateStorage> = new WeakMap();
 
-export class RegexRouter {
+export class RegexRouter implements Router<RegexRoute> {
 	constructor() {
 		props.set(this, {
 			routes: { }
 		});
 	}
 
-	createRoute(method: string, path: string) {
+	createRoute(method: string, path: string) : RegexRoute {
 		const { routes } = props.get(this);
 
 		if (! routes[method]) {
@@ -38,7 +31,7 @@ export class RegexRouter {
 		return route;
 	}
 
-	find(method: string, path: string) : FoundRoute {
+	find(method: string, path: string) : FoundRoute<RegexRoute> {
 		const { routes } = props.get(this);
 		const methodRoutes = routes[method.toLowerCase()];
 
