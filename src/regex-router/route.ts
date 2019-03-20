@@ -1,7 +1,20 @@
 
+import { RouterMiddwareInput } from '../input';
 import { MiddlewarePipeline } from '@celeri/middleware-pipeline';
 
-const props = new WeakMap();
+interface PrivateStorage {
+	pattern: RegExp,
+	params: ReadonlyArray<string>
+}
+
+interface Match {
+	glob: string,
+	params: {
+		[param: string]: string
+	}
+}
+
+const props: WeakMap<RegexRoute, PrivateStorage> = new WeakMap();
 
 const paramPattern = /:([^/]+)/g;
 const paramReplacement = '([^/]+)';
@@ -9,15 +22,19 @@ const paramReplacement = '([^/]+)';
 const globPattern = /\*\*$/;
 const globReplacement = '(.+)';
 
-export class RegexRoute extends MiddlewarePipeline {
-	constructor(route) {
+export class RegexRoute extends MiddlewarePipeline<RouterMiddwareInput> {
+	/**
+	 * @param route The route pattern (eg. `/people/:personId`)
+	 */
+	constructor(route: string) {
 		super();
 
 		const { pattern, params } = parseRoute(route);
+
 		props.set(this, { pattern, params });
 	}
 
-	matches(path) {
+	matches(path: string): Match {
 		const { pattern, params } = props.get(this);
 		const match = pattern.exec(path);
 
@@ -25,8 +42,9 @@ export class RegexRoute extends MiddlewarePipeline {
 			return null;
 		}
 
-		let glob;
+		let glob: string;
 		const parsedParams = { };
+
 		match.slice(1).forEach((value, index) => {
 			const param = params[index];
 
@@ -34,6 +52,7 @@ export class RegexRoute extends MiddlewarePipeline {
 			if (! param) {
 				glob = value;
 			}
+
 			else {
 				parsedParams[param] = value;
 			}
@@ -46,9 +65,9 @@ export class RegexRoute extends MiddlewarePipeline {
 	}
 }
 
-const parseRoute = (route) => {
-	const params = [ ];
-	const pattern = route
+const parseRoute = (route: string) => {
+	const params: string[] = [ ];
+	const pattern: string = route
 		.replace(globPattern, globReplacement)
 		.replace(paramPattern, (match, param) => {
 			params.push(param);

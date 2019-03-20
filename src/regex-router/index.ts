@@ -1,7 +1,21 @@
 
 import { RegexRoute } from './route';
 
-const props = new WeakMap();
+interface PrivateStorage {
+	routes: {
+		[method: string]: RegexRoute[]
+	}
+}
+
+interface FoundRoute {
+	route: RegexRoute,
+	params: {
+		[param: string]: string
+	},
+	glob: string
+}
+
+const props: WeakMap<RegexRouter, PrivateStorage> = new WeakMap();
 
 export class RegexRouter {
 	constructor() {
@@ -10,7 +24,7 @@ export class RegexRouter {
 		});
 	}
 
-	createRoute(method, path) {
+	createRoute(method: string, path: string) {
 		const { routes } = props.get(this);
 
 		if (! routes[method]) {
@@ -18,11 +32,13 @@ export class RegexRouter {
 		}
 
 		const route = new RegexRoute(path);
+
 		routes[method].push(route);
+
 		return route;
 	}
 
-	find(method, path) {
+	find(method: string, path: string) : FoundRoute {
 		const { routes } = props.get(this);
 		const methodRoutes = routes[method.toLowerCase()];
 
