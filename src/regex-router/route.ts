@@ -1,6 +1,5 @@
 
-import { RouterMiddwareInput } from '../input';
-import { Route, Match } from '../interface';
+import { Route, Match, RouterMiddwareInput } from '../interface';
 import { MiddlewarePipeline } from '@celeri/middleware-pipeline';
 
 interface PrivateStorage {
@@ -8,7 +7,7 @@ interface PrivateStorage {
 	params: ReadonlyArray<string>
 }
 
-const props: WeakMap<RegexRoute, PrivateStorage> = new WeakMap();
+const props: WeakMap<RegexRoute<any>, PrivateStorage> = new WeakMap();
 
 const paramPattern = /:([^/]+)/g;
 const paramReplacement = '([^/]+)';
@@ -16,7 +15,7 @@ const paramReplacement = '([^/]+)';
 const globPattern = /\*\*$/;
 const globReplacement = '(.+)';
 
-export class RegexRoute extends MiddlewarePipeline<RouterMiddwareInput> implements Route {
+export class RegexRoute<I extends RouterMiddwareInput> extends MiddlewarePipeline<I> implements Route<I> {
 	/**
 	 * @param route The route pattern (eg. `/people/:personId`)
 	 */

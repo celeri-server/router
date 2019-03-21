@@ -1,6 +1,5 @@
 
-export { RouterMiddwareInput } from './input';
-export { Match, FoundRoute, Route, Router } from './interface';
+export { Match, FoundRoute, Route, Router, RouterMiddwareInput } from './interface';
 
 export { RegexRouter } from './regex-router';
 // export { TrieRouter } from './trie-router';
