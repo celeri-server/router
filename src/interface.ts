@@ -28,5 +28,6 @@ export interface Route<I extends RouterMiddwareInput> extends MiddlewarePipeline
 
 export interface Router<T extends Route<I>, I extends RouterMiddwareInput> {
 	createRoute(method: string, path: string): T;
+	// TODO: Modify this to also take headers['host'] to enable creating HostRouter
 	find(method: string, path: string): FoundRoute<T, I>;
 }

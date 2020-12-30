@@ -3,3 +3,4 @@ export { Match, FoundRoute, Route, Router, RouterMiddwareInput } from './interfa
 
 export { RegexRouter } from './regex-router';
 // export { TrieRouter } from './trie-router';
+export { HostRouter } from './host-router';

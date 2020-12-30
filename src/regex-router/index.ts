@@ -24,7 +24,7 @@ export class RegexRouter<I extends RouterMiddwareInput> implements Router<RegexR
 			routes[method] = [ ];
 		}
 
-		const route = new RegexRoute(path) as RegexRoute<I>;
+		const route = new RegexRoute<I>(path);
 
 		routes[method].push(route);
 
